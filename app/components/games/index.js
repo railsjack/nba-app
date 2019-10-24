@@ -1,7 +1,15 @@
 import React, {Component} from 'react';
-import {View, Text} from 'react-native';
+import {ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+
+import {connect} from 'react-redux';
+import {getGames} from '../../store/actions/games_actions';
+import Moment from 'moment';
 
 class GamesComponent extends Component {
+  componentDidMount() {
+    this.props.dispatch(getGames())
+  }
+
   render() {
     return (
       <>
@@ -13,4 +21,12 @@ class GamesComponent extends Component {
   }
 }
 
-export default GamesComponent;
+
+const mapStateToProps = state => {
+  console.log(state);
+  return {
+    Games: state.Games
+  }
+}
+
+export default connect(mapStateToProps)(GamesComponent);
