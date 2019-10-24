@@ -1,21 +1,29 @@
 import React from 'react';
 
-import {Platform} from 'react-native';
-
 import {createSwitchNavigator, createAppContainer} from 'react-navigation';
-
 import {createBottomTabNavigator} from 'react-navigation-tabs';
-
 import {createStackNavigator} from 'react-navigation-stack';
 
 // SCREENS
 import SignIn from './components/auth';
 import News from './components/news';
+import Article from './components/news/article';
 import Games from './components/games';
+import GamesArticle from './components/games/article';
+
+const NewsStack = createStackNavigator({
+  News,
+  Article
+})
+
+const GamesStack = createStackNavigator({
+  Games,
+  GamesArticle
+})
 
 const AppStack = createBottomTabNavigator({
-  News,
-  Games,
+  News: NewsStack,
+  Games: GamesStack,
 });
 
 const AuthStack = createStackNavigator(
