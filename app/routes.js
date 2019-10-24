@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
 import {createSwitchNavigator, createAppContainer} from 'react-navigation';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import {createStackNavigator} from 'react-navigation-stack';
@@ -12,42 +14,63 @@ import Games from './components/games';
 import GamesArticle from './components/games/article';
 import Logo from './utils/logo';
 
-
 const headerConf = {
   headerLayoutPreset: 'center',
   defaultNavigationOptions: {
     headerStyle: {
-      backgroundColor: '#001338'
+      backgroundColor: '#001338',
     },
     headerTintColor: 'white',
-    headerTitle: Logo
-  }
-}
+    headerTitle: Logo,
+  },
+};
 
-const NewsStack = createStackNavigator({
-  News,
-  Article
-}, headerConf)
+const NewsStack = createStackNavigator(
+  {
+    News,
+    Article,
+  },
+  headerConf,
+);
 
-const GamesStack = createStackNavigator({
-  Games,
-  GamesArticle
-}, headerConf)
+const GamesStack = createStackNavigator(
+  {
+    Games,
+    GamesArticle,
+  },
+  headerConf,
+);
 
-const AppStack = createBottomTabNavigator({
-  News: NewsStack,
-  Games: GamesStack,
-}, {
-  tabBarOptions: {
-    activeTintColor: 'white',
-    showLabel: false,
-    activeBackgroundColor: '#00194b',
-    inactiveBackgroundColor: '#001338',
-    style: {
-      backgroundColor: 'blue'
-    }
-  }
-});
+const AppStack = createBottomTabNavigator(
+  {
+    News: NewsStack,
+    Games: GamesStack,
+  },
+  {
+    tabBarOptions: {
+      activeTintColor: 'white',
+      showLabel: false,
+      activeBackgroundColor: '#00194b',
+      inactiveBackgroundColor: '#001338',
+      style: {
+        backgroundColor: 'blue',
+      },
+    },
+    initialRouteName: 'News',
+    defaultNavigationOptions: ({navigation}) => ({
+      tabBarIcon: ({focused, horizontal, tintColor}) => {
+        const {routeName} = navigation.state;
+        let iconName;
+        if (routeName === 'News') {
+          iconName = 'ios-basketball';
+        } else if (routeName === 'Games') {
+          iconName = 'md-tv';
+        }
+        return <Ionicons name={iconName} size={25} color={tintColor} />;
+      },
+    }),
+  },
+);
 
 const AuthStack = createStackNavigator(
   {
