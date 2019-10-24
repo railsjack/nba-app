@@ -6,7 +6,9 @@ import ValidationRules from '../../utils/forms/validationRules';
 
 import {connect} from 'react-redux';
 import {signUp, signIn} from '../../store/actions/user_actions';
-import { bindActionCreators } from 'redux';
+import {bindActionCreators} from 'redux';
+
+import {setTokens} from '../../utils/misc';
 
 class AuthForm extends Component {
   state = {
@@ -34,7 +36,7 @@ class AuthForm extends Component {
         },
       },
       confirmPassword: {
-        value: '',
+        value: 'fofjrj123',
         valid: false,
         type: 'textinput',
         rules: {
@@ -77,7 +79,7 @@ class AuthForm extends Component {
       hasErrors: false,
     });
 
-    const formCopy = {...this.state.form};
+    const formCopy = this.state.form;
     formCopy[name].value = value;
 
     // rules
@@ -92,34 +94,49 @@ class AuthForm extends Component {
     });
   };
 
+  manageAccess = () => {
+    if (!this.props.User.auth.uid) {
+      this.setState({hasErrors: true});
+    } else {
+      setTokens(this.props.User.auth, () => {
+        // this.setState({hasErrors: false});
+        this.props.goNext();
+      });
+    }
+  };
+
   submitUser = () => {
     let isFormValid = true;
     let formToSubmit = {};
-    const formCopy = {...this.state.form};
+    const formCopy = this.state.form;
     for (let key in formCopy) {
       if (this.state.type === 'Login') {
         // LOGIN
         if (key !== 'confirmPassword') {
-          isFormValid = isFormValid && formCopy[key].valid;
-          formCopy[key] = formCopy[key].value;
+          // isFormValid = isFormValid && formCopy[key].valid;
+          formToSubmit[key] = formCopy[key].value;
         }
       } else {
         // REGISTER
-        isFormValid = isFormValid && formCopy[key].valid;
-        formCopy[key] = formCopy[key].value;
+        // isFormValid = isFormValid && formCopy[key].valid;
+        formToSubmit[key] = formCopy[key].value;
       }
     }
 
     if (isFormValid) {
-      if(this.state.type === 'Login'){
-        this.props.signIn(formToSubmit)
+      if (this.state.type === 'Login') {
+        this.props.signIn(formToSubmit).then(() => {
+          this.manageAccess();
+        });
       } else {
-        this.props.signUp(formToSubmit)
+        this.props.signUp(formToSubmit).then(() => {
+          this.manageAccess();
+        });
       }
     } else {
       this.setState({
-        hasErrors: true
-      })
+        hasErrors: true,
+      });
     }
   };
 
@@ -197,15 +214,15 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = (state) => {
-  console.log(state);
-  return {
-    User: state.User
-  }
-}
+function mapStateToProps(state) {
+  return state;
+};
 
-const mapDispatchToProps = (dispatch) => {
+function mapDispatchToProps(dispatch) {
   return bindActionCreators({signIn, signUp}, dispatch);
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(AuthForm);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(AuthForm);
