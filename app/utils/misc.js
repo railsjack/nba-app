@@ -1,10 +1,9 @@
 import AsyncStorage from '@react-native-community/async-storage';
-
+import {FIREBASE_APIKEY} from '../config/keys';
 export const FIREBASEURL = 'https://nba-app-mark.firebaseio.com';
-export const APIKEY = 'AIzaSyDTsw1G6Evv7zn8LSS0oAtyWl2QKDlR19o';
-export const SIGNUP = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${APIKEY}`;
-export const SIGNIN = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${APIKEY}`;
-export const REFRESH = `https://securetoken.googleapis.com/v1/token?key=${APIKEY}`;
+export const SIGNUP = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${FIREBASE_APIKEY}`;
+export const SIGNIN = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${FIREBASE_APIKEY}`;
+export const REFRESH = `https://securetoken.googleapis.com/v1/token?key=${FIREBASE_APIKEY}`;
 
 const APP_NAME = '@nba_app21';
 export const getTokens = (cb) => {
