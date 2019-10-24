@@ -5,7 +5,7 @@ export const SIGNUP = `https://identitytoolkit.googleapis.com/v1/accounts:signUp
 export const SIGNIN = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${FIREBASE_APIKEY}`;
 export const REFRESH = `https://securetoken.googleapis.com/v1/token?key=${FIREBASE_APIKEY}`;
 
-const APP_NAME = '@nba_app21';
+const APP_NAME = '@nba_app22';
 export const getTokens = cb => {
   AsyncStorage.multiGet([
     `${APP_NAME}@token`,

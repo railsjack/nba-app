@@ -31,7 +31,7 @@ class GamesComponent extends Component {
               <View style={styles.gameBox}>
                 <Image
                   source={{uri: item.awayData.logo}}
-                  style={{height: 80, width: 80}}
+                  style={{height: 80, width: 80, borderRadius: 5}}
                   resizeMode="contain"
                 />
                 <Text style={styles.teamRecord}>
@@ -39,9 +39,7 @@ class GamesComponent extends Component {
                 </Text>
               </View>
               <View style={styles.gameBox}>
-                <Text style={styles.gameTime}>
-                  {item.time}
-                </Text>
+                <Text style={styles.gameTime}>{item.time}</Text>
                 <Text style={styles.gameTime2}>
                   {Moment(item.date).format('d MMMM')}
                 </Text>
@@ -49,7 +47,7 @@ class GamesComponent extends Component {
               <View style={styles.gameBox}>
                 <Image
                   source={{uri: item.localData.logo}}
-                  style={{height: 80, width: 80}}
+                  style={{height: 80, width: 80, borderRadius: 5}}
                   resizeMode="contain"
                 />
                 <Text style={styles.teamRecord}>
@@ -64,7 +62,13 @@ class GamesComponent extends Component {
   render() {
     return (
       <ScrollView style={{backgroundColor: '#f0f0f0'}}>
-        <View style={{flex: 1, flexDirection: 'column', flexWrap: 'nowrap'}}>
+        <View
+          style={{
+            marginTop: 5,
+            flex: 1,
+            flexDirection: 'column',
+            flexWrap: 'nowrap',
+          }}>
           {this.showGames(this.props.Games)}
         </View>
       </ScrollView>
@@ -104,12 +108,12 @@ const styles = StyleSheet.create({
   },
   gameTime: {
     fontFamily: 'Roboto-Bold',
-    fontSize: 15
+    fontSize: 15,
   },
   gameTime2: {
     fontFamily: 'Roboto-Regular',
-    fontSize: 15
-  }
+    fontSize: 15,
+  },
 });
 
 export default connect(mapStateToProps)(GamesComponent);
