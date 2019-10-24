@@ -5,7 +5,7 @@ import {FIREBASEURL, convertFirebase, findTeamData} from '../../utils/misc';
 
 export const getGames = () => {
   const promise = new Promise((resolve, reject) => {
-    const request = axios({
+    axios({
       method: 'GET',
       url: `${FIREBASEURL}/teams.json`,
     })
