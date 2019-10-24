@@ -36,7 +36,7 @@ class NewsComponent extends Component {
               <View style={styles.contentCard}>
                 <Text style={styles.titleCard}>{item.title}</Text>
                 <View style={styles.bottomCard}>
-                  <Text style={styles.bottomCardTeam}>{item.team}</Text>
+                  <Text style={styles.bottomCardTeam}>{item.team} - </Text>
                   <Text style={styles.bottomCardText}>
                     Posted at: {Moment(item.date).format('d MMMM')}
                   </Text>
@@ -81,6 +81,7 @@ const styles = StyleSheet.create({
     color: '#232323',
     fontSize: 14,
     padding: 10,
+    fontFamily: 'Roboto-Bold'
   },
   bottomCard: {
     flex: 1,
@@ -92,10 +93,12 @@ const styles = StyleSheet.create({
   bottomCardTeam: {
     color: '#828282',
     fontSize: 12,
+    fontFamily: 'Roboto-Bold',
   },
   bottomCardText: {
     color: '#828282',
     fontSize: 12,
+    fontFamily: 'Roboto-Light',
   },
 });
 
