@@ -63,12 +63,10 @@ class ProfileComponent extends Component {
             This screen is available only when you log in / register
           </Text>
         </View>
-        <View style={styles.itemContainer2}>
-          <Button
+        <Button
             title="Login / Register"
             onPress={() => this.props.navigation.navigate('Auth')}
           />
-        </View>
       </>
     );
   };
