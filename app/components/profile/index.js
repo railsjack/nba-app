@@ -9,11 +9,12 @@ import {getTokens, removeTokens} from '../../utils/misc';
 class ProfileComponent extends Component {
   state = {
     loading: true,
+    logged_in: true,
   };
   componentDidMount() {
     getTokens(value => {
       if (value[0][1] === null) {
-        this.setState({loading: true});
+        this.setState({loading: false, logged_in: false});
       } else {
         this.props.getUserInfo(value[0][1]).then(() => {
           this.setState({loading: false});
@@ -23,19 +24,19 @@ class ProfileComponent extends Component {
   }
 
   logOut = () => {
-		this.setState({loading: true});
-		removeTokens(() => {
-			setTimeout(() => {
-				this.props.navigation.navigate('Auth');
-			}, 1500);
+    this.setState({loading: true});
+    removeTokens(() => {
+      setTimeout(() => {
+        this.props.navigation.navigate('Auth');
+      }, 1500);
     });
-	}
+  };
 
   showUserInfo = () => {
     const {user_info} = this.props.User;
     return this.state.loading ? (
       <ActivityIndicator style={{marginTop: 20}} />
-    ) : (
+    ) : this.state.logged_in ? (
       <>
         <View style={styles.itemContainer}>
           <Text style={styles.itemLabel}>Name</Text>
@@ -55,6 +56,20 @@ class ProfileComponent extends Component {
           <Button title="Logout" onPress={this.logOut} />
         </View>
       </>
+    ) : (
+      <>
+        <View style={styles.itemContainer2}>
+          <Text style={styles.itemValue}>
+            This screen is available only when you log in / register
+          </Text>
+        </View>
+        <View style={styles.itemContainer2}>
+          <Button
+            title="Login / Register"
+            onPress={() => this.props.navigation.navigate('Auth')}
+          />
+        </View>
+      </>
     );
   };
 
@@ -67,8 +82,8 @@ const styles = StyleSheet.create({
   profileContainer: {
     flex: 1,
     alignItems: 'center',
-		backgroundColor: '#f0f0f0',
-		paddingTop: 20,
+    backgroundColor: '#f0f0f0',
+    paddingTop: 20,
   },
   itemContainer: {
     marginTop: 20,

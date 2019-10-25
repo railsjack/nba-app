@@ -18,7 +18,7 @@ class AuthForm extends Component {
     hasErrors: false,
     form: {
       email: {
-        value: 'nahrae@gmail.com',
+        value: '',
         valid: false,
         type: 'textinput',
         rules: {
@@ -27,7 +27,7 @@ class AuthForm extends Component {
         },
       },
       password: {
-        value: 'fofjrj123',
+        value: '',
         valid: false,
         type: 'textinput',
         rules: {
@@ -36,7 +36,7 @@ class AuthForm extends Component {
         },
       },
       confirmPassword: {
-        value: 'fofjrj123',
+        value: '',
         valid: false,
         type: 'textinput',
         rules: {
@@ -113,12 +113,12 @@ class AuthForm extends Component {
       if (this.state.type === 'Login') {
         // LOGIN
         if (key !== 'confirmPassword') {
-          // isFormValid = isFormValid && formCopy[key].valid;
+          isFormValid = isFormValid && formCopy[key].valid;
           formToSubmit[key] = formCopy[key].value;
         }
       } else {
         // REGISTER
-        // isFormValid = isFormValid && formCopy[key].valid;
+        isFormValid = isFormValid && formCopy[key].valid;
         formToSubmit[key] = formCopy[key].value;
       }
     }

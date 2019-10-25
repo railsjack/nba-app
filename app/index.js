@@ -6,7 +6,6 @@ import {
 } from 'react-native';
 
 import { RootNavigator } from "./routes";
-
 const App: () => React$Node = () => {
   const Nav = RootNavigator();
   return (

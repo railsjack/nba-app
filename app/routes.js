@@ -16,6 +16,7 @@ import Profile from './components/profile'
 
 import Logo from './utils/logo';
 
+
 const headerConf = {
   headerLayoutPreset: 'center',
   defaultNavigationOptions: {
