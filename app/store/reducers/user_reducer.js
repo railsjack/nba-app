@@ -1,4 +1,4 @@
-import {SIGN_IN, SIGN_UP, AUTO_SIGN_IN} from '../types';
+import {SIGN_IN, SIGN_UP, AUTO_SIGN_IN, GET_USER_INFO} from '../types';
 export default (state = {}, action) => {
   switch (action.type) {
     case SIGN_IN:
@@ -27,6 +27,11 @@ export default (state = {}, action) => {
           token: action.payload.id_token || false,
           refToken: action.payload.refresh_token || false,
         },
+      };
+    case GET_USER_INFO:
+      return {
+        ...state,
+        user_info: action.payload.user_info || false,
       };
     default:
       return state;

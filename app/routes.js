@@ -12,6 +12,8 @@ import News from './components/news';
 import Article from './components/news/article';
 import Games from './components/games';
 import GamesArticle from './components/games/article';
+import Profile from './components/profile'
+
 import Logo from './utils/logo';
 
 const headerConf = {
@@ -41,10 +43,18 @@ const GamesStack = createStackNavigator(
   headerConf,
 );
 
+const ProfileStack = createStackNavigator(
+  {
+    Profile
+  },
+  headerConf,
+);
+
 const AppStack = createBottomTabNavigator(
   {
     News: NewsStack,
     Games: GamesStack,
+    Profile: ProfileStack,
   },
   {
     tabBarOptions: {
@@ -65,6 +75,8 @@ const AppStack = createBottomTabNavigator(
           iconName = 'ios-basketball';
         } else if (routeName === 'Games') {
           iconName = 'md-tv';
+        } else if (routeName === 'Profile') {
+          iconName = 'md-person';
         }
         return <Ionicons name={iconName} size={25} color={tintColor} />;
       },
